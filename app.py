@@ -5,19 +5,6 @@ import nltk
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 
-# Download NLTK resources (jika belum ada, penting untuk environment deployment)
-# Streamlit Cloud biasanya menangani ini jika tercantum di requirements
-try:
-    stopwords.words('english')
-except LookupError:
-    nltk.download('stopwords', quiet=True)
-try:
-    WordNetLemmatizer().lemmatize('test')
-except LookupError:
-    nltk.download('wordnet', quiet=True)
-    nltk.download('omw-1.4', quiet=True)
-
-
 # Load model dan vectorizer
 try:
     with open('cyberbullying_model.pkl', 'rb') as model_file:
@@ -30,7 +17,6 @@ except FileNotFoundError:
 except Exception as e:
     st.error(f"Error saat memuat model atau vectorizer: {e}")
     st.stop()
-
 
 # Fungsi pre-processing (HARUS SAMA PERSIS dengan yang di Colab saat training)
 lemmatizer = WordNetLemmatizer()
@@ -100,4 +86,5 @@ if st.button("Deteksi Cyberbullying"):
 
 st.markdown("---")
 st.markdown("Dibuat sebagai bagian dari tugas Machine Learning.")
-st.markdown("Dataset: [Kaggle Cyberbullying Classification](https://www.kaggle.com/datasets/andrewmvd/cyberbullying-classification)")
+st.markdown("Link Dataset: [Kaggle Cyberbullying Classification](https://www.kaggle.com/datasets/andrewmvd/cyberbullying-classification)")
+st.markdown("Link Source Code: [GitHub Repository](https://github.com/bestpaps/cyberbullystreamlit)") # Pastikan ini benar
